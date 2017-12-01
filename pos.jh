@@ -1,0 +1,145 @@
+entity COMPANY_DETAILS {
+Name String required,
+Location String required,
+DateOpened Instant required,
+LicenceNo String required
+}
+enum GENDER {
+MALE,
+FEMALE
+}
+enum PAYMENT_TYPES {
+BANK,
+MPESA,
+CASH,
+AIRTEL
+}
+enum Banks{
+KCB,
+EQUITY,
+COOPERATIVE,
+SAFARICOM,
+OTHER
+}
+enum Measurement {
+LITRES,
+MILLILITRES
+}
+entity Employees{
+FirstName String required,
+LastName String required,
+IdNo Integer required,
+Dob LocalDate required,
+Age Integer required,
+Gender GENDER required,
+Estate String required,
+ApartmentNo String ,
+Email String required,
+BankName Banks required,
+AccountNo String required,
+AccountName String required
+PaymentMode PAYMENT_TYPES required
+}
+
+entity ProductCategories{
+Code String required,
+Name String required,
+ShtDescription String required,
+Description String
+DateCreated Instant
+}
+entity SubCategories{
+Name String required,
+ShortDesciption String required,
+Description String
+}
+
+entity Packaging{
+Name String required,
+Quantity Integer required,
+Capacity Integer required,
+Unit Measurement required,
+}
+entity Brands {
+Name String,
+ShtDesc String,
+Description String
+}
+entity Products{
+Code String required,
+Name String required,
+ShtDescription String required,
+Description String,
+ReorderLevel Integer,
+ReorderQuantity Integer,
+AverageMonthlyUsage Integer,
+QuantitySuppliedToDate Integer
+}
+entity Inventory{
+BatchNo String required,
+BarCodeNo String required,
+Quantity Integer required min(0),
+SoldToDate Integer min(0)
+AvailableItems Integer min(0),
+UnitSellingPrice Integer required min(0)
+UnitBuyingPrice Integer required min(0)
+}
+entity Suppliers{
+Code String required,
+Name String required,
+MobileNo String required,
+Location String required,
+Email String
+}
+entity SupplierProducts{
+BuyingPrice Long required,
+StandardBuyingPrice Long,
+RetailPrice Long required,
+DeliveryLeadTime Integer,
+FirstItemDeliveryDate LocalDate,
+MinimumReorderLevel Integer,
+MaxReorderLevel Integer
+}
+entity GoodsReceivedFromSupplier{
+BatchNo String,
+Quantity Integer,
+UnitPrice Integer
+}
+entity GoodsReturnedToSupplier{
+BatchNo String,
+Quantity Integer
+}
+
+entity Sales{
+DateInitiated Instant required,
+UserId Integer,
+TotalSaleAmount Integer,
+TotalPaidAmount Integer,
+DateClosed Instant
+}
+entity SaleTransactions{
+Quantity Integer min(1),
+UnitPrice Integer min(0),
+}
+relationship OneToOne{
+Products{subCategory(Name)} to SubCategories{subCategoryProducts(Name)},
+Products{brand(Name)} to Brands{products(Name)},
+GoodsReceivedFromSupplier{pack(Name)} to Packaging,
+SupplierProducts{Products(Name)}to Products{suppliers},
+SupplierProducts{supplier(Name)} to Suppliers{products},
+GoodsReturnedToSupplier{batchSupplier(Name)} to Suppliers{goodsReturned},
+GoodsReceivedFromSupplier{batchProduct(Name)} to Products{receivedFromSupplier}
+}
+relationship OneToMany {
+ProductCategories{SubCategories(Name)} to SubCategories{category(Name)},
+Sales{transactions} to SaleTransactions{Sales(Id)},
+Products{InvRecords} to Inventory{Products(Name)}
+}
+relationship ManyToOne{
+SaleTransactions{product(ProductId)} to Inventory{transactions}
+}
+paginate all with infinite-scroll
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix
