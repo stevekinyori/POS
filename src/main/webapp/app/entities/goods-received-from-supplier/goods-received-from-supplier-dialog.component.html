@@ -1,0 +1,54 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myGoodsReceivedFromSupplierLabel">Create or edit a Goods Received From Supplier</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!goodsReceivedFromSupplier.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="goodsReceivedFromSupplier.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_batchNo">Batch No</label>
+            <input type="text" class="form-control" name="batchNo" id="field_batchNo"
+                [(ngModel)]="goodsReceivedFromSupplier.batchNo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="goodsReceivedFromSupplier.quantity" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_unitPrice">Unit Price</label>
+            <input type="number" class="form-control" name="unitPrice" id="field_unitPrice"
+                [(ngModel)]="goodsReceivedFromSupplier.unitPrice" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_pack">Pack</label>
+            <select class="form-control" id="field_pack" name="pack" [(ngModel)]="goodsReceivedFromSupplier.pack">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="packagingOption.id === goodsReceivedFromSupplier.pack?.id ? goodsReceivedFromSupplier.pack : packagingOption" *ngFor="let packagingOption of packs; trackBy: trackPackagingById">{{packagingOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_batchProduct">Batch Product</label>
+            <select class="form-control" id="field_batchProduct" name="batchProduct" [(ngModel)]="goodsReceivedFromSupplier.batchProduct">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="productsOption.id === goodsReceivedFromSupplier.batchProduct?.id ? goodsReceivedFromSupplier.batchProduct : productsOption" *ngFor="let productsOption of batchproducts; trackBy: trackProductsById">{{productsOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

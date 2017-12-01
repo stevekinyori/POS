@@ -1,0 +1,64 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySalesLabel">Create or edit a Sales</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!sales.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="sales.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateInitiated">Date Initiated</label>
+            <div class="d-flex">
+                <input id="field_dateInitiated" type="datetime-local" class="form-control" name="dateInitiated" [(ngModel)]="sales.dateInitiated"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.dateInitiated?.dirty && editForm.controls.dateInitiated?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateInitiated?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.dateInitiated?.errors?.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_userId">User Id</label>
+            <input type="number" class="form-control" name="userId" id="field_userId"
+                [(ngModel)]="sales.userId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalSaleAmount">Total Sale Amount</label>
+            <input type="number" class="form-control" name="totalSaleAmount" id="field_totalSaleAmount"
+                [(ngModel)]="sales.totalSaleAmount" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalPaidAmount">Total Paid Amount</label>
+            <input type="number" class="form-control" name="totalPaidAmount" id="field_totalPaidAmount"
+                [(ngModel)]="sales.totalPaidAmount" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dateClosed">Date Closed</label>
+            <div class="d-flex">
+                <input id="field_dateClosed" type="datetime-local" class="form-control" name="dateClosed" [(ngModel)]="sales.dateClosed"
+                />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

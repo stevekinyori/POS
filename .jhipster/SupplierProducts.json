@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "products",
+            "otherEntityName": "products",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "suppliers"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "supplier",
+            "otherEntityName": "suppliers",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "products"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "buyingPrice",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "standardBuyingPrice",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "retailPrice",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "deliveryLeadTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "firstItemDeliveryDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "minimumReorderLevel",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxReorderLevel",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171201143250",
+    "entityTableName": "supplier_products",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

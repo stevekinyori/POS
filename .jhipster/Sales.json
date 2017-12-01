@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "transactions",
+            "otherEntityName": "saleTransactions",
+            "otherEntityRelationshipName": "sales"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dateInitiated",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalSaleAmount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalPaidAmount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dateClosed",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20171201143253",
+    "entityTableName": "sales",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

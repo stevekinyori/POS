@@ -1,0 +1,41 @@
+
+<div *ngIf="productCategories">
+    <h2><span>Product Categories</span> {{productCategories.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{productCategories.code}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{productCategories.name}}</span>
+        </dd>
+        <dt><span>Sht Description</span></dt>
+        <dd>
+            <span>{{productCategories.shtDescription}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{productCategories.description}}</span>
+        </dd>
+        <dt><span>Date Created</span></dt>
+        <dd>
+            <span>{{productCategories.dateCreated | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product-categories/'+ productCategories.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

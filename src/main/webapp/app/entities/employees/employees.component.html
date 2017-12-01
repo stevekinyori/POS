@@ -1,0 +1,93 @@
+<div>
+    <h2>
+        <span>Employees</span>
+        <button class="btn btn-primary float-right jh-create-entity create-employees" [routerLink]="['/', { outlets: { popup: ['employees-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Employees
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="employees">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="firstName"><span>First Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastName"><span>Last Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="idNo"><span>Id No</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dob"><span>Dob</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="age"><span>Age</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="gender"><span>Gender</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="estate"><span>Estate</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apartmentNo"><span>Apartment No</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="email"><span>Email</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bankName"><span>Bank Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="accountNo"><span>Account No</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="accountName"><span>Account Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="paymentMode"><span>Payment Mode</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let employees of employees ;trackBy: trackId">
+                <td><a [routerLink]="['../employees', employees.id ]">{{employees.id}}</a></td>
+                <td>{{employees.firstName}}</td>
+                <td>{{employees.lastName}}</td>
+                <td>{{employees.idNo}}</td>
+                <td>{{employees.dob | date:'mediumDate'}}</td>
+                <td>{{employees.age}}</td>
+                <td>{{employees.gender}}</td>
+                <td>{{employees.estate}}</td>
+                <td>{{employees.apartmentNo}}</td>
+                <td>{{employees.email}}</td>
+                <td>{{employees.bankName}}</td>
+                <td>{{employees.accountNo}}</td>
+                <td>{{employees.accountName}}</td>
+                <td>{{employees.paymentMode}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../employees', employees.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employees/'+ employees.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employees/'+ employees.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

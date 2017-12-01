@@ -1,0 +1,55 @@
+
+<div *ngIf="inventory">
+    <h2><span>Inventory</span> {{inventory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Batch No</span></dt>
+        <dd>
+            <span>{{inventory.batchNo}}</span>
+        </dd>
+        <dt><span>Bar Code No</span></dt>
+        <dd>
+            <span>{{inventory.barCodeNo}}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{inventory.quantity}}</span>
+        </dd>
+        <dt><span>Sold To Date</span></dt>
+        <dd>
+            <span>{{inventory.soldToDate}}</span>
+        </dd>
+        <dt><span>Available Items</span></dt>
+        <dd>
+            <span>{{inventory.availableItems}}</span>
+        </dd>
+        <dt><span>Unit Selling Price</span></dt>
+        <dd>
+            <span>{{inventory.unitSellingPrice}}</span>
+        </dd>
+        <dt><span>Unit Buying Price</span></dt>
+        <dd>
+            <span>{{inventory.unitBuyingPrice}}</span>
+        </dd>
+        <dt><span>Products</span></dt>
+        <dd>
+            <div *ngIf="inventory.products">
+                <a [routerLink]="['/products', inventory.products?.id]">{{inventory.products?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'inventory/'+ inventory.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

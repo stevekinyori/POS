@@ -44,6 +44,24 @@ public class CacheConfiguration {
             cm.createCache(com.pos.core.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.pos.core.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.pos.core.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.COMPANY_DETAILS.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Employees.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.ProductCategories.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.ProductCategories.class.getName() + ".subCategories", jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.SubCategories.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Packaging.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Brands.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Products.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Products.class.getName() + ".invRecords", jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Inventory.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Inventory.class.getName() + ".transactions", jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Suppliers.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.SupplierProducts.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.GoodsReceivedFromSupplier.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.GoodsReturnedToSupplier.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Sales.class.getName(), jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.Sales.class.getName() + ".transactions", jcacheConfiguration);
+            cm.createCache(com.pos.core.domain.SaleTransactions.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

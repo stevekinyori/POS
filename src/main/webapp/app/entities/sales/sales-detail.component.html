@@ -1,0 +1,41 @@
+
+<div *ngIf="sales">
+    <h2><span>Sales</span> {{sales.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date Initiated</span></dt>
+        <dd>
+            <span>{{sales.dateInitiated | date:'medium'}}</span>
+        </dd>
+        <dt><span>User Id</span></dt>
+        <dd>
+            <span>{{sales.userId}}</span>
+        </dd>
+        <dt><span>Total Sale Amount</span></dt>
+        <dd>
+            <span>{{sales.totalSaleAmount}}</span>
+        </dd>
+        <dt><span>Total Paid Amount</span></dt>
+        <dd>
+            <span>{{sales.totalPaidAmount}}</span>
+        </dd>
+        <dt><span>Date Closed</span></dt>
+        <dd>
+            <span>{{sales.dateClosed | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'sales/'+ sales.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

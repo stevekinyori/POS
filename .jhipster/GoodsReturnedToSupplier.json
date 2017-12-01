@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "batchSupplier",
+            "otherEntityName": "suppliers",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "goodsReturned"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "batchNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171201143252",
+    "entityTableName": "goods_returned_to_supplier",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

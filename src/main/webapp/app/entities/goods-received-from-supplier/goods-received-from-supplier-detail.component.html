@@ -1,0 +1,45 @@
+
+<div *ngIf="goodsReceivedFromSupplier">
+    <h2><span>Goods Received From Supplier</span> {{goodsReceivedFromSupplier.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Batch No</span></dt>
+        <dd>
+            <span>{{goodsReceivedFromSupplier.batchNo}}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{goodsReceivedFromSupplier.quantity}}</span>
+        </dd>
+        <dt><span>Unit Price</span></dt>
+        <dd>
+            <span>{{goodsReceivedFromSupplier.unitPrice}}</span>
+        </dd>
+        <dt><span>Pack</span></dt>
+        <dd>
+            <div *ngIf="goodsReceivedFromSupplier.pack">
+                <a [routerLink]="['/packaging', goodsReceivedFromSupplier.pack?.id]">{{goodsReceivedFromSupplier.pack?.name}}</a>
+            </div>
+        </dd>
+        <dt><span>Batch Product</span></dt>
+        <dd>
+            <div *ngIf="goodsReceivedFromSupplier.batchProduct">
+                <a [routerLink]="['/products', goodsReceivedFromSupplier.batchProduct?.id]">{{goodsReceivedFromSupplier.batchProduct?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'goods-received-from-supplier/'+ goodsReceivedFromSupplier.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

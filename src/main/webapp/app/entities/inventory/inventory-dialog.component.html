@@ -1,0 +1,141 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myInventoryLabel">Create or edit a Inventory</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!inventory.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="inventory.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_batchNo">Batch No</label>
+            <input type="text" class="form-control" name="batchNo" id="field_batchNo"
+                [(ngModel)]="inventory.batchNo" required/>
+            <div [hidden]="!(editForm.controls.batchNo?.dirty && editForm.controls.batchNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.batchNo?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_barCodeNo">Bar Code No</label>
+            <input type="text" class="form-control" name="barCodeNo" id="field_barCodeNo"
+                [(ngModel)]="inventory.barCodeNo" required/>
+            <div [hidden]="!(editForm.controls.barCodeNo?.dirty && editForm.controls.barCodeNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.barCodeNo?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="inventory.quantity" required min="0"/>
+            <div [hidden]="!(editForm.controls.quantity?.dirty && editForm.controls.quantity?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.quantity?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantity?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantity?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_soldToDate">Sold To Date</label>
+            <input type="number" class="form-control" name="soldToDate" id="field_soldToDate"
+                [(ngModel)]="inventory.soldToDate" min="0"/>
+            <div [hidden]="!(editForm.controls.soldToDate?.dirty && editForm.controls.soldToDate?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.soldToDate?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.soldToDate?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_availableItems">Available Items</label>
+            <input type="number" class="form-control" name="availableItems" id="field_availableItems"
+                [(ngModel)]="inventory.availableItems" min="0"/>
+            <div [hidden]="!(editForm.controls.availableItems?.dirty && editForm.controls.availableItems?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.availableItems?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.availableItems?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_unitSellingPrice">Unit Selling Price</label>
+            <input type="number" class="form-control" name="unitSellingPrice" id="field_unitSellingPrice"
+                [(ngModel)]="inventory.unitSellingPrice" required min="0"/>
+            <div [hidden]="!(editForm.controls.unitSellingPrice?.dirty && editForm.controls.unitSellingPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.unitSellingPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.unitSellingPrice?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.unitSellingPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_unitBuyingPrice">Unit Buying Price</label>
+            <input type="number" class="form-control" name="unitBuyingPrice" id="field_unitBuyingPrice"
+                [(ngModel)]="inventory.unitBuyingPrice" required min="0"/>
+            <div [hidden]="!(editForm.controls.unitBuyingPrice?.dirty && editForm.controls.unitBuyingPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.unitBuyingPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.unitBuyingPrice?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.unitBuyingPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_products">Products</label>
+            <select class="form-control" id="field_products" name="products" [(ngModel)]="inventory.products" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="productsOption.id === inventory.products?.id ? inventory.products : productsOption" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

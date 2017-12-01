@@ -1,0 +1,93 @@
+<div>
+    <h2>
+        <span>Supplier Products</span>
+        <button class="btn btn-primary float-right jh-create-entity create-supplier-products" [routerLink]="['/', { outlets: { popup: ['supplier-products-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Supplier Products
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="supplierProducts">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="buyingPrice"><span>Buying Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="standardBuyingPrice"><span>Standard Buying Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="retailPrice"><span>Retail Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="deliveryLeadTime"><span>Delivery Lead Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="firstItemDeliveryDate"><span>First Item Delivery Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="minimumReorderLevel"><span>Minimum Reorder Level</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="maxReorderLevel"><span>Max Reorder Level</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="products.name"><span>Products</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="supplier.name"><span>Supplier</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let supplierProducts of supplierProducts ;trackBy: trackId">
+                <td><a [routerLink]="['../supplier-products', supplierProducts.id ]">{{supplierProducts.id}}</a></td>
+                <td>{{supplierProducts.buyingPrice}}</td>
+                <td>{{supplierProducts.standardBuyingPrice}}</td>
+                <td>{{supplierProducts.retailPrice}}</td>
+                <td>{{supplierProducts.deliveryLeadTime}}</td>
+                <td>{{supplierProducts.firstItemDeliveryDate | date:'mediumDate'}}</td>
+                <td>{{supplierProducts.minimumReorderLevel}}</td>
+                <td>{{supplierProducts.maxReorderLevel}}</td>
+                <td>
+                    <div *ngIf="supplierProducts.products">
+                        <a [routerLink]="['../products', supplierProducts.products?.id ]" >{{supplierProducts.products?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="supplierProducts.supplier">
+                        <a [routerLink]="['../suppliers', supplierProducts.supplier?.id ]" >{{supplierProducts.supplier?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../supplier-products', supplierProducts.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'supplier-products/'+ supplierProducts.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'supplier-products/'+ supplierProducts.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

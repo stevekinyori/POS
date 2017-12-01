@@ -1,0 +1,61 @@
+
+<div *ngIf="supplierProducts">
+    <h2><span>Supplier Products</span> {{supplierProducts.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Buying Price</span></dt>
+        <dd>
+            <span>{{supplierProducts.buyingPrice}}</span>
+        </dd>
+        <dt><span>Standard Buying Price</span></dt>
+        <dd>
+            <span>{{supplierProducts.standardBuyingPrice}}</span>
+        </dd>
+        <dt><span>Retail Price</span></dt>
+        <dd>
+            <span>{{supplierProducts.retailPrice}}</span>
+        </dd>
+        <dt><span>Delivery Lead Time</span></dt>
+        <dd>
+            <span>{{supplierProducts.deliveryLeadTime}}</span>
+        </dd>
+        <dt><span>First Item Delivery Date</span></dt>
+        <dd>
+            <span>{{supplierProducts.firstItemDeliveryDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Minimum Reorder Level</span></dt>
+        <dd>
+            <span>{{supplierProducts.minimumReorderLevel}}</span>
+        </dd>
+        <dt><span>Max Reorder Level</span></dt>
+        <dd>
+            <span>{{supplierProducts.maxReorderLevel}}</span>
+        </dd>
+        <dt><span>Products</span></dt>
+        <dd>
+            <div *ngIf="supplierProducts.products">
+                <a [routerLink]="['/products', supplierProducts.products?.id]">{{supplierProducts.products?.name}}</a>
+            </div>
+        </dd>
+        <dt><span>Supplier</span></dt>
+        <dd>
+            <div *ngIf="supplierProducts.supplier">
+                <a [routerLink]="['/suppliers', supplierProducts.supplier?.id]">{{supplierProducts.supplier?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'supplier-products/'+ supplierProducts.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

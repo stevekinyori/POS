@@ -1,0 +1,73 @@
+
+<div *ngIf="employees">
+    <h2><span>Employees</span> {{employees.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>First Name</span></dt>
+        <dd>
+            <span>{{employees.firstName}}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+            <span>{{employees.lastName}}</span>
+        </dd>
+        <dt><span>Id No</span></dt>
+        <dd>
+            <span>{{employees.idNo}}</span>
+        </dd>
+        <dt><span>Dob</span></dt>
+        <dd>
+            <span>{{employees.dob | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Age</span></dt>
+        <dd>
+            <span>{{employees.age}}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{employees.gender}}</span>
+        </dd>
+        <dt><span>Estate</span></dt>
+        <dd>
+            <span>{{employees.estate}}</span>
+        </dd>
+        <dt><span>Apartment No</span></dt>
+        <dd>
+            <span>{{employees.apartmentNo}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{employees.email}}</span>
+        </dd>
+        <dt><span>Bank Name</span></dt>
+        <dd>
+            <span>{{employees.bankName}}</span>
+        </dd>
+        <dt><span>Account No</span></dt>
+        <dd>
+            <span>{{employees.accountNo}}</span>
+        </dd>
+        <dt><span>Account Name</span></dt>
+        <dd>
+            <span>{{employees.accountName}}</span>
+        </dd>
+        <dt><span>Payment Mode</span></dt>
+        <dd>
+            <span>{{employees.paymentMode}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'employees/'+ employees.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

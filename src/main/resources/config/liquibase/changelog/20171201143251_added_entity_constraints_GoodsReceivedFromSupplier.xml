@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity GoodsReceivedFromSupplier.
+    -->
+    <changeSet id="20171201143251-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="pack_id"
+                                 baseTableName="goods_received_from_supplier"
+                                 constraintName="fk_goods_received_from_supplier_pack_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="packaging"/>
+
+        <addForeignKeyConstraint baseColumnNames="batch_product_id"
+                                 baseTableName="goods_received_from_supplier"
+                                 constraintName="fk_goods_received_from_supplier_batch_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="products"/>
+
+    </changeSet>
+</databaseChangeLog>

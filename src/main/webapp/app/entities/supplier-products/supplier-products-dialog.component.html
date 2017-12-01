@@ -1,0 +1,99 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySupplierProductsLabel">Create or edit a Supplier Products</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!supplierProducts.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="supplierProducts.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_buyingPrice">Buying Price</label>
+            <input type="number" class="form-control" name="buyingPrice" id="field_buyingPrice"
+                [(ngModel)]="supplierProducts.buyingPrice" required/>
+            <div [hidden]="!(editForm.controls.buyingPrice?.dirty && editForm.controls.buyingPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.buyingPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.buyingPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_standardBuyingPrice">Standard Buying Price</label>
+            <input type="number" class="form-control" name="standardBuyingPrice" id="field_standardBuyingPrice"
+                [(ngModel)]="supplierProducts.standardBuyingPrice" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_retailPrice">Retail Price</label>
+            <input type="number" class="form-control" name="retailPrice" id="field_retailPrice"
+                [(ngModel)]="supplierProducts.retailPrice" required/>
+            <div [hidden]="!(editForm.controls.retailPrice?.dirty && editForm.controls.retailPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.retailPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.retailPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_deliveryLeadTime">Delivery Lead Time</label>
+            <input type="number" class="form-control" name="deliveryLeadTime" id="field_deliveryLeadTime"
+                [(ngModel)]="supplierProducts.deliveryLeadTime" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_firstItemDeliveryDate">First Item Delivery Date</label>
+            <div class="input-group">
+                <input id="field_firstItemDeliveryDate" type="text" class="form-control" name="firstItemDeliveryDate" ngbDatepicker  #firstItemDeliveryDateDp="ngbDatepicker" [(ngModel)]="supplierProducts.firstItemDeliveryDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="firstItemDeliveryDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_minimumReorderLevel">Minimum Reorder Level</label>
+            <input type="number" class="form-control" name="minimumReorderLevel" id="field_minimumReorderLevel"
+                [(ngModel)]="supplierProducts.minimumReorderLevel" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_maxReorderLevel">Max Reorder Level</label>
+            <input type="number" class="form-control" name="maxReorderLevel" id="field_maxReorderLevel"
+                [(ngModel)]="supplierProducts.maxReorderLevel" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_products">Products</label>
+            <select class="form-control" id="field_products" name="products" [(ngModel)]="supplierProducts.products">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="productsOption.id === supplierProducts.products?.id ? supplierProducts.products : productsOption" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_supplier">Supplier</label>
+            <select class="form-control" id="field_supplier" name="supplier" [(ngModel)]="supplierProducts.supplier">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="suppliersOption.id === supplierProducts.supplier?.id ? supplierProducts.supplier : suppliersOption" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

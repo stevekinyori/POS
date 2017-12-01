@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "pack",
+            "otherEntityName": "packaging",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "goodsReceivedFromSupplier"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "batchProduct",
+            "otherEntityName": "products",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "receivedFromSupplier"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "batchNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "unitPrice",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171201143251",
+    "entityTableName": "goods_received_from_supplier",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

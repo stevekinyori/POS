@@ -1,0 +1,90 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "subCategory",
+            "otherEntityName": "subCategories",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "subCategoryProducts(Name)"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "brand",
+            "otherEntityName": "brands",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "products(Name)"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "invRecords",
+            "otherEntityName": "inventory",
+            "otherEntityRelationshipName": "products"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "suppliers",
+            "otherEntityName": "supplierProducts",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "products"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "receivedFromSupplier",
+            "otherEntityName": "goodsReceivedFromSupplier",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "batchProduct"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "shtDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "reorderLevel",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "reorderQuantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "averageMonthlyUsage",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "quantitySuppliedToDate",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171201143247",
+    "entityTableName": "products",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

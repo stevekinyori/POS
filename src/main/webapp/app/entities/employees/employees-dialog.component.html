@@ -1,0 +1,186 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEmployeesLabel">Create or edit a Employees</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!employees.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="employees.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                [(ngModel)]="employees.firstName" required/>
+            <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                [(ngModel)]="employees.lastName" required/>
+            <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_idNo">Id No</label>
+            <input type="number" class="form-control" name="idNo" id="field_idNo"
+                [(ngModel)]="employees.idNo" required/>
+            <div [hidden]="!(editForm.controls.idNo?.dirty && editForm.controls.idNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.idNo?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.idNo?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dob">Dob</label>
+            <div class="input-group">
+                <input id="field_dob" type="text" class="form-control" name="dob" ngbDatepicker  #dobDp="ngbDatepicker" [(ngModel)]="employees.dob"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dob?.dirty && editForm.controls.dob?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dob?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_age">Age</label>
+            <input type="number" class="form-control" name="age" id="field_age"
+                [(ngModel)]="employees.age" required/>
+            <div [hidden]="!(editForm.controls.age?.dirty && editForm.controls.age?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.age?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.age?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" [(ngModel)]="employees.gender" id="field_gender"  required>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+            </select>
+            <div [hidden]="!(editForm.controls.gender?.dirty && editForm.controls.gender?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.gender?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_estate">Estate</label>
+            <input type="text" class="form-control" name="estate" id="field_estate"
+                [(ngModel)]="employees.estate" required/>
+            <div [hidden]="!(editForm.controls.estate?.dirty && editForm.controls.estate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.estate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_apartmentNo">Apartment No</label>
+            <input type="text" class="form-control" name="apartmentNo" id="field_apartmentNo"
+                [(ngModel)]="employees.apartmentNo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="employees.email" required/>
+            <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.email?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_bankName">Bank Name</label>
+            <select class="form-control" name="bankName" [(ngModel)]="employees.bankName" id="field_bankName"  required>
+                <option value="KCB">KCB</option>
+                <option value="EQUITY">EQUITY</option>
+                <option value="COOPERATIVE">COOPERATIVE</option>
+                <option value="SAFARICOM">SAFARICOM</option>
+                <option value="OTHER">OTHER</option>
+            </select>
+            <div [hidden]="!(editForm.controls.bankName?.dirty && editForm.controls.bankName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.bankName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_accountNo">Account No</label>
+            <input type="text" class="form-control" name="accountNo" id="field_accountNo"
+                [(ngModel)]="employees.accountNo" required/>
+            <div [hidden]="!(editForm.controls.accountNo?.dirty && editForm.controls.accountNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.accountNo?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_accountName">Account Name</label>
+            <input type="text" class="form-control" name="accountName" id="field_accountName"
+                [(ngModel)]="employees.accountName" required/>
+            <div [hidden]="!(editForm.controls.accountName?.dirty && editForm.controls.accountName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.accountName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_paymentMode">Payment Mode</label>
+            <select class="form-control" name="paymentMode" [(ngModel)]="employees.paymentMode" id="field_paymentMode"  required>
+                <option value="BANK">BANK</option>
+                <option value="MPESA">MPESA</option>
+                <option value="CASH">CASH</option>
+                <option value="AIRTEL">AIRTEL</option>
+            </select>
+            <div [hidden]="!(editForm.controls.paymentMode?.dirty && editForm.controls.paymentMode?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paymentMode?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

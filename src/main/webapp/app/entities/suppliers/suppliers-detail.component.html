@@ -1,0 +1,41 @@
+
+<div *ngIf="suppliers">
+    <h2><span>Suppliers</span> {{suppliers.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{suppliers.code}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{suppliers.name}}</span>
+        </dd>
+        <dt><span>Mobile No</span></dt>
+        <dd>
+            <span>{{suppliers.mobileNo}}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+            <span>{{suppliers.location}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{suppliers.email}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'suppliers/'+ suppliers.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
